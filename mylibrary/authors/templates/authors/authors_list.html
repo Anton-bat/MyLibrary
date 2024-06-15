@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+    {% block content %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="card my-4" style="width: 18rem;">
+        <img class="card-img-top" src="{% static 'img/card_image_placeholder.jpg' %}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="my-4">List of Authors</h1>
+            <ul class="list-group">
+                {% for author in authors %}
+                    <li class="list-group-item">
+                        <div class="media">
+                            {% if author.profile_picture %}
+                                <img src="{{ author.profile_picture.url }}" class="mr-3 rounded-circle" width="64" height="64">
+                            {% else %}
+                                <img src="{% static 'img/default_profile_picture.jpg' %}" class="mr-3 rounded-circle" width="64" height="64">
+                            {% endif %}
+                            <div class="media-body">
+                                <h5 class="mt-0">{{ author.first_name }} {{ author.last_name }}</h5>
+                                <p>Date of Birth: {{ author.birth_date }}</p>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>
